@@ -1,0 +1,133 @@
+@import "tailwindcss";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  overflow-x: hidden;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* Glassmorphism styles */
+.glass-morphism {
+  background: rgba(17, 25, 40, 0.75);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.125);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.glass-morphism-light {
+  background: rgba(17, 25, 40, 0.25);
+  backdrop-filter: blur(12px) saturate(150%);
+  -webkit-backdrop-filter: blur(12px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Light mode styles */
+html.light {
+  color-scheme: light;
+}
+
+html.light body {
+  background: linear-gradient(to bottom right, #f3f4f6, #e5e7eb, #f3f4f6) !important;
+  color: #111827 !important;
+}
+
+html.light main {
+  background: linear-gradient(to bottom right, #f3f4f6, #e5e7eb, #f3f4f6) !important;
+  color: #111827 !important;
+}
+
+html.light nav {
+  color: #111827 !important;
+}
+
+html.light .glass-morphism {
+  background: rgba(255, 255, 255, 0.75) !important;
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid rgba(209, 213, 219, 0.3) !important;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1) !important;
+}
+
+html.light .glass-morphism-light {
+  background: rgba(255, 255, 255, 0.25) !important;
+  backdrop-filter: blur(12px) saturate(150%);
+  -webkit-backdrop-filter: blur(12px) saturate(150%);
+  border: 1px solid rgba(209, 213, 219, 0.2) !important;
+}
+
+html.light section {
+  color: #111827 !important;
+}
+
+html.light h1, html.light h2, html.light h3, html.light h4, html.light h5, html.light h6 {
+  color: #111827 !important;
+}
+
+html.light .text-white {
+  color: #111827 !important;
+}
+
+html.light .text-gray-400 {
+  color: #6b7280 !important;
+}
+
+html.light .text-gray-500 {
+  color: #6b7280 !important;
+}
+
+html.light .bg-gray-800,
+html.light .bg-gray-800\/50 {
+  background-color: #ffffff !important;
+  color: #111827 !important;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+}
+
+html.light .border-gray-700,
+html.light .border-gray-800 {
+  border-color: #e5e7eb !important;
+}
+
+html.light .bg-gray-900\/50 {
+  background-color: #f9fafb !important;
+}
+
+html.light .bg-blue-500 {
+  background-color: #3b82f6 !important;
+}
+
+html.light .bg-blue-500\/10 {
+  background-color: rgba(59, 130, 246, 0.1) !important;
+}
+
+html.light .text-blue-400 {
+  color: #2563eb !important;
+}
+
+html.light a {
+  color: #111827;
+}
+
+html.light a:hover {
+  color: #2563eb !important;
+}
+
+/* Keep social button icons white in light mode */
+html.light .text-white {
+  color: #ffffff !important;
+}
+
+html.light svg.text-white,
+html.light svg.text-white path {
+  fill: #ffffff !important;
+  color: #ffffff !important;
+}

@@ -1,0 +1,228 @@
+'use client';
+
+import { motion } from 'framer-motion';
+import { Github, Linkedin, Mail, ExternalLink, Code2, Briefcase, GraduationCap } from 'lucide-react';
+
+const skills = {
+  frontend: ['React.js', 'Next.js', 'TypeScript', 'Tailwind CSS', 'HTML/CSS'],
+  backend: ['Node.js', 'Express.js', 'Java', 'Spring Boot', 'Python'],
+  database: ['MongoDB', 'MySQL', 'PostgreSQL', 'Firebase'],
+  tools: ['Git', 'Docker', 'AWS', 'Postman', 'VS Code']
+};
+
+const projects = [
+  {
+    title: 'E-Commerce Platform',
+    description: 'Full-stack e-commerce solution with payment integration',
+    tech: ['Next.js', 'MongoDB', 'Stripe', 'Tailwind'],
+    github: 'https://github.com/nimeshakalanka',
+    live: '#'
+  },
+  {
+    title: 'Task Management App',
+    description: 'Collaborative task management with real-time updates',
+    tech: ['React', 'Firebase', 'Node.js', 'Express'],
+    github: 'https://github.com/nimeshakalanka',
+    live: '#'
+  },
+  {
+    title: 'Portfolio Website',
+    description: 'Modern portfolio built with Next.js and Framer Motion',
+    tech: ['Next.js', 'TypeScript', 'Framer Motion'],
+    github: 'https://github.com/nimeshakalanka',
+    live: '#'
+  }
+];
+
+export default function Home() {
+  return (
+    <main className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white">
+      {/* Navigation */}
+      <nav className="fixed top-0 w-full bg-gray-900/80 backdrop-blur-md z-50 border-b border-gray-800">
+        <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+          <motion.h1 
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent"
+          >
+            NA
+          </motion.h1>
+          <div className="flex gap-6">
+            <a href="#about" className="hover:text-blue-400 transition">About</a>
+            <a href="#skills" className="hover:text-blue-400 transition">Skills</a>
+            <a href="#projects" className="hover:text-blue-400 transition">Projects</a>
+            <a href="#contact" className="hover:text-blue-400 transition">Contact</a>
+          </div>
+        </div>
+      </nav>
+
+      {/* Hero Section */}
+      <section className="min-h-screen flex items-center justify-center px-6 pt-20">
+        <div className="max-w-4xl text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <h2 className="text-5xl md:text-7xl font-bold mb-4">
+              Hi, I'm <span className="bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">Nimesha Akalanka</span>
+            </h2>
+            <p className="text-xl md:text-2xl text-gray-400 mb-8">
+              Full Stack Developer | Software Engineer
+            </p>
+            <p className="text-lg text-gray-500 mb-12 max-w-2xl mx-auto">
+              Passionate about building modern web applications with clean code and intuitive user experiences.
+            </p>
+            <div className="flex gap-4 justify-center">
+              <a href="https://github.com/nimeshakalanka" target="_blank" rel="noopener noreferrer" 
+                 className="p-3 bg-gray-800 rounded-full hover:bg-gray-700 transition">
+                <Github size={24} />
+              </a>
+              <a href="https://linkedin.com/in/nimesha-akalanka" target="_blank" rel="noopener noreferrer"
+                 className="p-3 bg-gray-800 rounded-full hover:bg-gray-700 transition">
+                <Linkedin size={24} />
+              </a>
+              <a href="mailto:nimeshakalanka@gmail.com"
+                 className="p-3 bg-gray-800 rounded-full hover:bg-gray-700 transition">
+                <Mail size={24} />
+              </a>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* About Section */}
+      <section id="about" className="py-20 px-6">
+        <div className="max-w-4xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-4xl font-bold mb-8 flex items-center gap-3">
+              <Code2 className="text-blue-400" />
+              About Me
+            </h2>
+            <p className="text-gray-400 text-lg leading-relaxed">
+              I'm a passionate Full Stack Developer with experience in building scalable web applications. 
+              I love working with modern technologies and creating solutions that make a difference. 
+              Currently focused on React, Next.js, and cloud technologies.
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Skills Section */}
+      <section id="skills" className="py-20 px-6 bg-gray-900/50">
+        <div className="max-w-6xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-4xl font-bold mb-12 flex items-center gap-3">
+              <Briefcase className="text-blue-400" />
+              Skills
+            </h2>
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {Object.entries(skills).map(([category, items]) => (
+                <motion.div
+                  key={category}
+                  whileHover={{ y: -5 }}
+                  className="bg-gray-800/50 p-6 rounded-xl border border-gray-700"
+                >
+                  <h3 className="text-xl font-semibold mb-4 capitalize text-blue-400">
+                    {category}
+                  </h3>
+                  <ul className="space-y-2">
+                    {items.map((skill) => (
+                      <li key={skill} className="text-gray-400">{skill}</li>
+                    ))}
+                  </ul>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Projects Section */}
+      <section id="projects" className="py-20 px-6">
+        <div className="max-w-6xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-4xl font-bold mb-12 flex items-center gap-3">
+              <GraduationCap className="text-blue-400" />
+              Projects
+            </h2>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {projects.map((project, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                  whileHover={{ y: -5 }}
+                  className="bg-gray-800/50 p-6 rounded-xl border border-gray-700"
+                >
+                  <h3 className="text-xl font-semibold mb-3">{project.title}</h3>
+                  <p className="text-gray-400 mb-4">{project.description}</p>
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    {project.tech.map((tech) => (
+                      <span key={tech} className="px-3 py-1 bg-blue-500/10 text-blue-400 rounded-full text-sm">
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                  <div className="flex gap-4">
+                    <a href={project.github} target="_blank" rel="noopener noreferrer"
+                       className="flex items-center gap-2 text-gray-400 hover:text-blue-400 transition">
+                      <Github size={18} />
+                      Code
+                    </a>
+                    <a href={project.live} target="_blank" rel="noopener noreferrer"
+                       className="flex items-center gap-2 text-gray-400 hover:text-blue-400 transition">
+                      <ExternalLink size={18} />
+                      Live
+                    </a>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Contact Section */}
+      <section id="contact" className="py-20 px-6 bg-gray-900/50">
+        <div className="max-w-4xl mx-auto text-center">
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-4xl font-bold mb-8">Let's Connect</h2>
+            <p className="text-gray-400 text-lg mb-8">
+              I'm always open to discussing new projects, creative ideas, or opportunities.
+            </p>
+            <a href="mailto:nimeshakalanka@gmail.com"
+               className="inline-block px-8 py-4 bg-blue-500 hover:bg-blue-600 rounded-lg font-semibold transition">
+              Get In Touch
+            </a>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="py-8 px-6 border-t border-gray-800">
+        <div className="max-w-6xl mx-auto text-center text-gray-500">
+          <p>© 2025 Nimesha Akalanka. All rights reserved.</p>
+        </div>
+      </footer>
+    </main>
+  );
+}
