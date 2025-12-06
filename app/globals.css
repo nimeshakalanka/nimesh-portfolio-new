@@ -15,8 +15,20 @@ html {
 }
 
 body {
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(-45deg, #0a0a0a, #111827, #0f172a, #000000);
+  background-size: 400% 400%;
+  animation: gradientAnimation 12s ease infinite;
+  min-height: 100vh;
   overflow-x: hidden;
   transition: background 0.3s ease, color 0.3s ease;
+}
+
+@keyframes gradientAnimation {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 /* Glassmorphism styles */

@@ -5,9 +5,9 @@ import Image from 'next/image';
 
 export default function Hero() {
   return (
-    <section className="min-h-screen flex flex-row items-center justify-center px-4 md:px-6 pt-20 gap-8 md:gap-12">
-      <Image src="/assets/Mine.png" alt="Nimesh Akalanka" width={300} height={450} className="object-contain md:w-[350px] md:h-[525px] w-[250px] h-[375px] self-start md:self-center"/>
-      <div className="max-w-4xl text-center self-start md:mt-[120px]">
+    <section className="min-h-screen flex flex-col md:flex-row items-center justify-center px-4 md:px-6 pt-20 gap-8 md:gap-12">
+      <Image src="/assets/Mine.png" alt="Nimesh Akalanka" width={300} height={450} className="object-contain w-[180px] h-[270px] sm:w-[220px] sm:h-[330px] md:w-[300px] md:h-[450px] lg:w-[350px] lg:h-[525px] md:self-center"/>
+      <div className="max-w-4xl text-center md:self-start md:mt-[100px]">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
