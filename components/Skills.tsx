@@ -55,6 +55,15 @@ export default function Skills() {
   return (
     <section id="skills" className="py-12 md:py-20 px-4 md:px-6">
       <div className="max-w-7xl mx-auto">
+        <motion.h1 
+          className="text-3xl md:text-4xl font-bold text-center mb-12 md:mb-16"
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+        >
+          Skills & Tech Stack
+        </motion.h1>
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
