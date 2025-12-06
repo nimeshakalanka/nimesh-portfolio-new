@@ -1,81 +1,115 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Github, ExternalLink, GraduationCap } from 'lucide-react';
+import { Github, ExternalLink, Code2 } from 'lucide-react';
+import Image from 'next/image';
 
 const projects = [
   {
-    title: 'E-Commerce Platform',
-    description: 'Full-stack e-commerce solution with payment integration',
-    tech: ['Next.js', 'MongoDB', 'Stripe', 'Tailwind'],
+    title: 'All Save Bot',
+    description: 'A modern telegram bot who can download social media videos without watermark.',
+    tech: ['Python', 'Mongo DB', 'TikTok API', 'Meta API'],
+    image: '/assets/projects/allsave.png',
     github: 'https://github.com/nimeshakalanka',
-    live: '#'
+    demo: 'https://t.me/AllSaveRobot'
   },
   {
-    title: 'Task Management App',
-    description: 'Collaborative task management with real-time updates',
-    tech: ['React', 'Firebase', 'Node.js', 'Express'],
-    github: 'https://github.com/nimeshakalanka',
-    live: '#'
+    title: 'Lanka Travel Diaries',
+    description: 'Travel guiding website for tourists made using React + JavaScript. Done as a teamwork.',
+    tech: ['React', 'JavaScript', 'SASS', 'Tailwind'],
+    image: '/assets/projects/ltd.png',
+    github: 'https://github.com/nimeshakalanka/lanka-travel-diaries',
+    demo: 'https://lanka-travel-diaries.vercel.app'
   },
   {
-    title: 'Portfolio Website',
-    description: 'Modern portfolio built with Next.js and Framer Motion',
-    tech: ['Next.js', 'TypeScript', 'Framer Motion'],
-    github: 'https://github.com/nimeshakalanka',
-    live: '#'
+    title: 'TikTok Downloader API',
+    description: 'An API can download TikTok Videos with or without watermark.',
+    tech: ['JavaScript', 'Python', 'Cloudflare'],
+    image: '/assets/projects/tiktok.png',
+    github: 'https://github.com/nimeshakalanka/tiktok-api',
+    demo: 'https://tiktok-dl.akalanka11.workers.dev'
   }
 ];
 
 export default function Projects() {
   return (
     <section id="projects" className="py-12 md:py-20 px-4 md:px-6">
-      <div className="max-w-6xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
+      <div className="max-w-7xl mx-auto">
+        <motion.h1 
+          className="text-3xl md:text-4xl font-bold text-center mb-12 md:mb-16"
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-8 md:mb-12 flex items-center gap-3 justify-center md:justify-start">
-            <GraduationCap className="text-blue-400 w-6 h-6 md:w-8 md:h-8" />
-            Projects
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
-            {projects.map((project, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                whileHover={{ y: -5 }}
-                className="bg-gray-800/50 p-4 md:p-6 rounded-xl border border-gray-700"
-              >
-                <h3 className="text-lg md:text-xl font-semibold mb-2 md:mb-3">{project.title}</h3>
-                <p className="text-sm md:text-base text-gray-400 mb-3 md:mb-4">{project.description}</p>
-                <div className="flex flex-wrap gap-2 mb-3 md:mb-4">
+          Projects
+        </motion.h1>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+          {projects.map((project, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1, duration: 0.5 }}
+              whileHover={{ y: -8, transition: { duration: 0.2 } }}
+              className="bg-gray-800/30 rounded-2xl border border-gray-700/50 overflow-hidden hover:border-blue-500/50 transition-all duration-300 shadow-lg hover:shadow-xl"
+            >
+              {/* Image Section */}
+              <div className="relative h-48 md:h-56 overflow-hidden bg-gray-900/50">
+                <Image
+                  src={project.image}
+                  alt={project.title}
+                  fill
+                  className="object-cover hover:scale-110 transition-transform duration-500"
+                />
+              </div>
+
+              {/* Content Section */}
+              <div className="p-5">
+                <h3 className="text-xl font-bold mb-2 text-white">{project.title}</h3>
+                <p className="text-sm text-gray-400 mb-4 line-clamp-2 leading-relaxed">
+                  {project.description}
+                </p>
+
+                {/* Tech Stack Tags */}
+                <div className="flex flex-wrap gap-2 mb-4">
                   {project.tech.map((tech) => (
-                    <span key={tech} className="px-2 md:px-3 py-1 bg-blue-500/10 text-blue-400 rounded-full text-xs md:text-sm">
+                    <span 
+                      key={tech} 
+                      className="px-2.5 py-1 bg-gray-700/40 text-gray-300 rounded-md text-xs font-medium"
+                    >
                       {tech}
                     </span>
                   ))}
                 </div>
-                <div className="flex gap-3 md:gap-4">
-                  <a href={project.github} target="_blank" rel="noopener noreferrer"
-                     className="flex items-center gap-1.5 md:gap-2 text-sm md:text-base text-gray-400 hover:text-blue-400 transition">
-                    <Github size={16} className="md:w-[18px] md:h-[18px]" />
+
+                {/* Action Links */}
+                <div className="flex gap-3 pt-3 border-t border-gray-700/50">
+                  <a 
+                    href={project.demo} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-1.5 text-sm text-blue-400 hover:text-blue-300 transition font-medium"
+                  >
+                    <ExternalLink size={16} />
+                    Demo
+                  </a>
+                  <a 
+                    href={project.github} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-1.5 text-sm text-purple-400 hover:text-purple-300 transition font-medium"
+                  >
+                    <Github size={16} />
                     Code
                   </a>
-                  <a href={project.live} target="_blank" rel="noopener noreferrer"
-                     className="flex items-center gap-1.5 md:gap-2 text-sm md:text-base text-gray-400 hover:text-blue-400 transition">
-                    <ExternalLink size={16} className="md:w-[18px] md:h-[18px]" />
-                    Live
-                  </a>
                 </div>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   );

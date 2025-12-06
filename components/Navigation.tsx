@@ -65,7 +65,7 @@ export default function Navigation() {
           
           {/* Desktop Navigation */}
           <div className="hidden md:flex gap-6 items-center">
-            <a href="#about" className="hover:text-blue-400 transition">About</a>
+            <a href="#main" className="hover:text-blue-400 transition">About</a>
             <a href="#skills" className="hover:text-blue-400 transition">Skills</a>
             <a href="#projects" className="hover:text-blue-400 transition">Projects</a>
             <a href="#contact" className="hover:text-blue-400 transition">Contact</a>

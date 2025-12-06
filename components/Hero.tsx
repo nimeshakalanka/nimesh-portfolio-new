@@ -5,7 +5,7 @@ import Image from 'next/image';
 
 export default function Hero() {
   return (
-    <section className="min-h-screen flex flex-col md:flex-row items-center justify-center px-4 md:px-6 pt-20 gap-8 md:gap-12">
+    <section id='main' className="min-h-screen flex flex-col md:flex-row items-center justify-center px-4 md:px-6 pt-20 gap-8 md:gap-12">
       <motion.div
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
@@ -42,7 +42,7 @@ export default function Hero() {
             Full Stack Developer | Software Engineer
           </motion.p>
           <motion.p 
-            className="text-base sm:text-lg text-gray-500 dark:text-gray-500 light:text-gray-700 mb-6 md:mb-8 px-4 md:px-0 leading-relaxed"
+            className="text-sm sm:text-base text-gray-500 dark:text-gray-500 light:text-gray-700 mb-4 md:mb-5 px-4 md:px-0 leading-relaxed"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.6 }}
@@ -50,14 +50,14 @@ export default function Hero() {
             I am a 22-year-old undergraduate pursuing my B.Sc. (Hons) in Information Systems at Sabaragamuwa University of Sri Lanka. I am a passionate full-stack website developer, with skills in both front-end and back-end development.
           </motion.p>
           <motion.p 
-            className="text-base sm:text-lg text-gray-500 dark:text-gray-500 light:text-gray-700 mb-6 md:mb-8 px-4 md:px-0 leading-relaxed"
+            className="text-sm sm:text-base text-gray-500 dark:text-gray-500 light:text-gray-700 mb-5 md:mb-6 px-4 md:px-0 leading-relaxed"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.8 }}
           >
             Since 2021, I have worked as a freelancer on platforms like Fiverr, where I specialize in creating Telegram bots and web applications. This freelance experience has allowed me to apply my technical knowledge to real-world projects and build a strong professional portfolio.
           </motion.p>
-          <div className="flex items-center gap-3 md:gap-4 align-center justify-center mb-8">
+          <div className="flex items-center gap-3 md:gap-4 align-center justify-center mb-5">
             
             <section className="flex justify-center items-center relative">
               <a
@@ -143,6 +143,35 @@ export default function Hero() {
               </a>
             </section>
         </div>
+        
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 1 }}
+          className="flex justify-center"
+        >
+          <a
+            href="/assets/cv.pdf"
+            download="Nimesh_Akalanka_CV.pdf"
+            className="group relative inline-flex items-center gap-2 px-6 py-2.5 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300"
+          >
+            <svg 
+              xmlns="http://www.w3.org/2000/svg" 
+              className="w-5 h-5" 
+              viewBox="0 0 24 24" 
+              fill="none" 
+              stroke="currentColor" 
+              strokeWidth="2" 
+              strokeLinecap="round" 
+              strokeLinejoin="round"
+            >
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            <span>Download CV</span>
+          </a>
+        </motion.div>
 
         </motion.div>
       </div>
