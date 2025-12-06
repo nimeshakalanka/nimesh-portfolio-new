@@ -1,14 +1,13 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Github, Linkedin, Mail } from 'lucide-react';
 import Image from 'next/image';
 
 export default function Hero() {
   return (
-    <section className="min-h-screen flex flex-col md:flex-row items-center justify-center px-4 md:px-6 pt-20 gap-8 md:gap-12">
-      <Image src="/assets/Mine.png" alt="Nimesh Akalanka" width={200} height={300} className="object-contain border rounded-full"/>
-      <div className="max-w-4xl text-center">
+    <section className="min-h-screen flex flex-row items-center justify-center px-4 md:px-6 pt-20 gap-8 md:gap-12">
+      <Image src="/assets/Mine.png" alt="Nimesh Akalanka" width={300} height={450} className="object-contain md:w-[350px] md:h-[525px] w-[250px] h-[375px] self-start md:self-center"/>
+      <div className="max-w-4xl text-center self-start md:mt-[120px]">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -21,10 +20,12 @@ export default function Hero() {
           <p className="text-lg sm:text-xl md:text-2xl text-gray-400 dark:text-gray-400 light:text-gray-600 mb-6 md:mb-8">
             Full Stack Developer | Software Engineer
           </p>
-          <p className="text-base sm:text-lg text-gray-500 dark:text-gray-500 light:text-gray-700 mb-6 md:mb-8 px-4 md:px-0">
-            Passionate about building modern web applications with clean code and intuitive user experiences.
+          <p className="text-base sm:text-lg text-gray-500 dark:text-gray-500 light:text-gray-700 mb-6 md:mb-8 px-4 md:px-0 leading-relaxed">
+            I am a 22-year-old undergraduate pursuing my B.Sc. (Hons) in Information Systems at Sabaragamuwa University of Sri Lanka. I am a passionate full-stack website developer, with skills in both front-end and back-end development.
           </p>
-          <br/>
+          <p className="text-base sm:text-lg text-gray-500 dark:text-gray-500 light:text-gray-700 mb-6 md:mb-8 px-4 md:px-0 leading-relaxed">
+            Since 2021, I have worked as a freelancer on platforms like Fiverr, where I specialize in creating Telegram bots and web applications. This freelance experience has allowed me to apply my technical knowledge to real-world projects and build a strong professional portfolio.
+          </p>
           <div className="flex items-center gap-3 md:gap-4 align-center justify-center mb-8">
             
             <section className="flex justify-center items-center relative">
