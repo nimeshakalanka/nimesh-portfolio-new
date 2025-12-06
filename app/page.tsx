@@ -8,6 +8,7 @@ import Projects from '@/components/Projects';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 import Preloader from '@/components/Preloader';
+import CustomCursor from '@/components/CustomCursor';
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
@@ -22,6 +23,7 @@ export default function Home() {
 
   return (
     <>
+      <CustomCursor />
       <Preloader />
       {!isLoading && (
         <main className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white transition-colors duration-300">

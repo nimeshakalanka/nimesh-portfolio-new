@@ -6,26 +6,57 @@ import Image from 'next/image';
 export default function Hero() {
   return (
     <section className="min-h-screen flex flex-col md:flex-row items-center justify-center px-4 md:px-6 pt-20 gap-8 md:gap-12">
-      <Image src="/assets/Mine.png" alt="Nimesh Akalanka" width={300} height={450} className="object-contain w-[180px] h-[270px] sm:w-[220px] sm:h-[330px] md:w-[300px] md:h-[450px] lg:w-[350px] lg:h-[525px] md:self-center"/>
+      <motion.div
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        whileHover={{ scale: 1.05 }}
+      >
+        <Image src="/assets/Mine.png" alt="Nimesh Akalanka" width={300} height={450} className="object-contain w-[180px] h-[270px] sm:w-[220px] sm:h-[330px] md:w-[300px] md:h-[450px] lg:w-[350px] lg:h-[525px] md:self-center"/>
+      </motion.div>
       <div className="max-w-4xl text-center md:self-start md:mt-[100px]">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
         >
-          
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold mb-4">
-            Hi, I'm <span className="bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">Nimesh Akalanka</span>
-          </h2>
-          <p className="text-lg sm:text-xl md:text-2xl text-gray-400 dark:text-gray-400 light:text-gray-600 mb-6 md:mb-8">
+          <motion.h2 
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold mb-4"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
+            Hi, I'm <motion.span 
+              className="bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.8, delay: 0.5 }}
+            >Nimesh Akalanka</motion.span>
+          </motion.h2>
+          <motion.p 
+            className="text-lg sm:text-xl md:text-2xl text-gray-400 dark:text-gray-400 light:text-gray-600 mb-6 md:mb-8"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+          >
             Full Stack Developer | Software Engineer
-          </p>
-          <p className="text-base sm:text-lg text-gray-500 dark:text-gray-500 light:text-gray-700 mb-6 md:mb-8 px-4 md:px-0 leading-relaxed">
+          </motion.p>
+          <motion.p 
+            className="text-base sm:text-lg text-gray-500 dark:text-gray-500 light:text-gray-700 mb-6 md:mb-8 px-4 md:px-0 leading-relaxed"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.6 }}
+          >
             I am a 22-year-old undergraduate pursuing my B.Sc. (Hons) in Information Systems at Sabaragamuwa University of Sri Lanka. I am a passionate full-stack website developer, with skills in both front-end and back-end development.
-          </p>
-          <p className="text-base sm:text-lg text-gray-500 dark:text-gray-500 light:text-gray-700 mb-6 md:mb-8 px-4 md:px-0 leading-relaxed">
+          </motion.p>
+          <motion.p 
+            className="text-base sm:text-lg text-gray-500 dark:text-gray-500 light:text-gray-700 mb-6 md:mb-8 px-4 md:px-0 leading-relaxed"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.8 }}
+          >
             Since 2021, I have worked as a freelancer on platforms like Fiverr, where I specialize in creating Telegram bots and web applications. This freelance experience has allowed me to apply my technical knowledge to real-world projects and build a strong professional portfolio.
-          </p>
+          </motion.p>
           <div className="flex items-center gap-3 md:gap-4 align-center justify-center mb-8">
             
             <section className="flex justify-center items-center relative">
