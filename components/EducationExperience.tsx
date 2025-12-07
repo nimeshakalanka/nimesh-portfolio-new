@@ -69,12 +69,12 @@ export default function EducationExperience() {
                   className="relative pl-6 pb-4 border-l-2 border-gray-700/50 last:pb-0"
                 >
                   <div className="absolute left-[-7px] top-0 w-3 h-3 rounded-full bg-blue-400"></div>
-                  <div className="bg-gray-800/30 p-3 rounded-lg border border-gray-700/30 hover:border-blue-500/50 transition-all">
-                    <h3 className="text-base md:text-lg font-semibold text-white mb-1">
+                  <div className="bg-gray-800/30 light:bg-gray-100/80 p-3 rounded-lg border border-gray-700/30 light:border-gray-300 hover:border-blue-500/50 transition-all">
+                    <h3 className="text-base md:text-lg font-semibold text-white light:text-gray-900 mb-1">
                       {edu.degree}
                     </h3>
-                    <p className="text-emerald-400 text-sm font-medium mb-2">{edu.institution}</p>
-                    <div className="flex flex-wrap gap-3 text-xs text-gray-400 mb-2">
+                    <p className="text-emerald-400 light:text-emerald-600 text-sm font-medium mb-2">{edu.institution}</p>
+                    <div className="flex flex-wrap gap-3 text-xs text-gray-400 light:text-gray-600 mb-2">
                       <span className="flex items-center gap-1">
                         <Calendar className="w-4 h-4" />
                         {edu.period}
@@ -84,7 +84,7 @@ export default function EducationExperience() {
                         {edu.location}
                       </span>
                     </div>
-                    <p className="text-gray-300 text-sm leading-relaxed">{edu.description}</p>
+                    <p className="text-gray-300 light:text-gray-700 text-sm leading-relaxed">{edu.description}</p>
                   </div>
                 </motion.div>
               ))}
@@ -113,18 +113,18 @@ export default function EducationExperience() {
                   className="relative pl-6 pb-4 border-l-2 border-gray-700/50 last:pb-0"
                 >
                   <div className="absolute left-[-7px] top-0 w-3 h-3 rounded-full bg-blue-400"></div>
-                  <div className="bg-gray-800/30 p-3 rounded-lg border border-gray-700/30 hover:border-blue-500/50 transition-all">
-                    <h3 className="text-base md:text-lg font-semibold text-white mb-1">
+                  <div className="bg-gray-800/30 light:bg-gray-100/80 p-3 rounded-lg border border-gray-700/30 light:border-gray-300 hover:border-blue-500/50 transition-all">
+                    <h3 className="text-base md:text-lg font-semibold text-white light:text-gray-900 mb-1">
                       {exp.role}
                     </h3>
-                    <p className="text-emerald-400 text-sm font-medium mb-2">{exp.company}</p>
-                    <div className="flex flex-wrap gap-3 text-xs text-gray-400 mb-2">
+                    <p className="text-emerald-400 light:text-emerald-600 text-sm font-medium mb-2">{exp.company}</p>
+                    <div className="flex flex-wrap gap-3 text-xs text-gray-400 light:text-gray-600 mb-2">
                       <span className="flex items-center gap-1">
                         <Calendar className="w-4 h-4" />
                         {exp.period}
                       </span>
                     </div>
-                    <p className="text-gray-300 text-sm leading-relaxed">{exp.description}</p>
+                    <p className="text-gray-300 light:text-gray-700 text-sm leading-relaxed">{exp.description}</p>
                   </div>
                 </motion.div>
               ))}
