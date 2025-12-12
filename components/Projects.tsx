@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Github, ExternalLink, Code2 } from 'lucide-react';
+import { Github, ExternalLink, PlusCircle, Sparkles } from 'lucide-react';
 import Image from 'next/image';
 
 const projects = [
@@ -10,8 +10,40 @@ const projects = [
     description: 'A modern telegram bot who can download social media videos without watermark.',
     tech: ['Python', 'Mongo DB', 'TikTok API', 'Meta API'],
     image: '/assets/projects/allsave.png',
-    github: 'https://github.com/nimeshakalanka',
-    demo: 'https://t.me/AllSaveRobot'
+    github: 'https://github.com/nimeshakalanka/all_save',
+    demo: 'https://t.me/AIL_Save_Bot'
+  },
+  {
+    title: 'NextJS Portfolio',
+    description: 'A modern portfolio website built with Next.js and Tailwind CSS to showcase my projects and skills.',
+    tech: ['Next.js', 'Tailwind CSS', 'Framer Motion'],
+    image: '/assets/projects/portfolio-new.png',
+    github: 'https://github.com/nimeshakalanka/nimesh-portfolio-new',
+    demo: 'https://www.nimeshakalanka.dev'
+  },
+  {
+    title: 'Hotel Billing System',
+    description: 'A desktop application for managing hotel billing and reservations, built with JavaScript, Netlify and Neone database.',
+    tech: ['JavaScript', 'Netlify', 'Neone DB'],
+    image: '/assets/projects/hotel-bill.png',
+    github: 'https://github.com/nimeshakalanka/my-bill',
+    demo: 'https://summit-bill.netlify.app/'
+  },
+  {
+    title: 'Flask Project',
+    description: 'A website built with Flask framework when user in website capture image from webcam and save it to the server.',
+    tech: ['Python', 'Flask', 'HTML', 'CSS', 'Mongo DB'],
+    image: '/assets/projects/flask.png',
+    github: 'https://github.com/nimeshakalanka/flaskProject',
+    demo: 'https://92b2884c-70c2-40cc-a5c8-31983980bfb7-00-3qspg3y618yek.janeway.replit.dev:3001/'
+  },
+  {
+    title: 'Priya Dream Kitchen Website',
+    description: 'A website for our family business made using HTML, CSS and JavaScript.',
+    tech: ['HTML', 'CSS', 'JavaScript'],
+    image: '/assets/projects/priya-dream-kitchen.png',
+    github: 'https://github.com/nimeshakalanka/Priya-Dream-Kitchen.github.io',
+    demo: 'https://priyadreamkitchen.app'
   },
   {
     title: 'Lanka Travel Diaries',
@@ -19,7 +51,7 @@ const projects = [
     tech: ['React', 'JavaScript', 'SASS', 'Tailwind'],
     image: '/assets/projects/ltd.png',
     github: 'https://github.com/nimeshakalanka/lanka-travel-diaries',
-    demo: 'https://lanka-travel-diaries.vercel.app'
+    demo: 'https://nimeshakalanka.github.io/Lanka-Travel-Diaries'
   },
   {
     title: 'TikTok Downloader API',
@@ -28,7 +60,16 @@ const projects = [
     image: '/assets/projects/tiktok.png',
     github: 'https://github.com/nimeshakalanka/tiktok-api',
     demo: 'https://tiktok-dl.akalanka11.workers.dev'
-  }
+  },
+  {
+    title: 'React Portfolio',
+    description: 'A modern portfolio website built with React and Vite to showcase my projects and skills.',
+    tech: ['React', 'Vite', 'Tailwind CSS'],
+    image: '/assets/projects/portfolio-react.png',
+    github: 'https://github.com/nimeshakalanka/portfolio',
+    demo: 'https://nimeshakalanka.github.io/portfolio'
+  },
+  
 ];
 
 export default function Projects() {
@@ -94,7 +135,7 @@ export default function Projects() {
                     className="flex items-center gap-1.5 text-sm text-blue-400 hover:text-blue-300 transition font-medium"
                   >
                     <ExternalLink size={16} />
-                    Demo
+                    Live
                   </a>
                   <a 
                     href={project.github} 
@@ -109,6 +150,89 @@ export default function Projects() {
               </div>
             </motion.div>
           ))}
+
+          {/* More Projects Coming Soon Card */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: projects.length * 0.1, duration: 0.5 }}
+            whileHover={{ y: -8, transition: { duration: 0.2 } }}
+            className="bg-gradient-to-br from-blue-500/10 via-purple-500/10 to-pink-500/10 rounded-2xl border-2 border-dashed border-blue-400/30 overflow-hidden hover:border-blue-400/60 transition-all duration-300 shadow-lg hover:shadow-blue-400/20 flex flex-col items-center justify-center min-h-[400px] relative group"
+          >
+            {/* Animated background gradient */}
+            <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-purple-500/5 to-pink-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            
+            {/* Floating sparkles */}
+            <motion.div
+              animate={{ 
+                y: [-10, 10, -10],
+                rotate: [0, 360],
+              }}
+              transition={{ 
+                duration: 4,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+              className="absolute top-10 right-10 text-blue-400/30"
+            >
+              <Sparkles size={24} />
+            </motion.div>
+            
+            <motion.div
+              animate={{ 
+                y: [10, -10, 10],
+                rotate: [360, 0],
+              }}
+              transition={{ 
+                duration: 5,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+              className="absolute bottom-10 left-10 text-purple-400/30"
+            >
+              <Sparkles size={20} />
+            </motion.div>
+
+            {/* Main content */}
+            <motion.div
+              animate={{ scale: [1, 1.05, 1] }}
+              transition={{ 
+                duration: 2,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+              className="relative z-10"
+            >
+              <PlusCircle className="w-20 h-20 text-blue-400 mb-6" />
+            </motion.div>
+            
+            <h3 className="text-2xl font-bold mb-3 text-white relative z-10">More Projects Coming Soon</h3>
+            <p className="text-sm text-gray-400 text-center px-6 mb-4 relative z-10">
+              I'm constantly working on exciting new projects. Stay tuned for more!
+            </p>
+            
+            <div className="flex flex-wrap gap-2 justify-center px-6 relative z-10">
+              <span className="px-3 py-1 bg-blue-500/20 text-blue-300 rounded-md text-xs font-medium">
+                AI/ML
+              </span>
+              <span className="px-3 py-1 bg-purple-500/20 text-purple-300 rounded-md text-xs font-medium">
+                Web3
+              </span>
+              <span className="px-3 py-1 bg-pink-500/20 text-pink-300 rounded-md text-xs font-medium">
+                Mobile Apps
+              </span>
+            </div>
+
+            {/* Animated border glow */}
+            <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                 style={{
+                   background: 'linear-gradient(45deg, transparent 40%, rgba(59, 130, 246, 0.1) 50%, transparent 60%)',
+                   backgroundSize: '200% 200%',
+                   animation: 'shimmer 3s infinite'
+                 }}>
+            </div>
+          </motion.div>
         </div>
       </div>
     </section>
