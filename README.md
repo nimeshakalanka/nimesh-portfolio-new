@@ -85,80 +85,29 @@ yarn install
 npm run dev
 # or
 yarn dev
+# or
+pnpm dev
+# or
+bun dev
 ```
 
-4. **Open your browser**
-Navigate to [http://localhost:3000](http://localhost:3000)
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-### Build for Production
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-```bash
-npm run build
-npm run start
-```
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-## 🎨 Customization
+## Learn More
 
-### Theme Colors
-Edit `app/globals.css` to customize the color scheme:
-```css
-/* Modify gradient background */
-body {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-}
-```
+To learn more about Next.js, take a look at the following resources:
 
-### Adding Projects
-Edit `components/Projects.tsx`:
-```typescript
-const projects = [
-  {
-    title: 'Your Project',
-    description: 'Project description',
-    tech: ['React', 'Node.js'],
-    image: '/assets/projects/your-project.png',
-    github: 'https://github.com/yourusername/project',
-    demo: 'https://yourproject.com'
-  }
-];
-```
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-### Adding Certificates
-Edit `components/Certificates.tsx` to add your achievements.
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-## 📸 Screenshots
+## Deploy on Vercel
 
-Visit [nimeshakalanka.dev](https://nimeshakalanka.dev) to see the live portfolio.
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-## 🌐 Deployment
-
-This project is deployed on Vercel. To deploy your own:
-
-1. Push your code to GitHub
-2. Import the project to [Vercel](https://vercel.com)
-3. Configure your domain
-4. Deploy! 🚀
-
-## 📝 License
-
-This project is open source and available under the [MIT License](LICENSE).
-
-## 👤 Author
-
-**Nimesh Akalanka**
-- Website: [nimeshakalanka.dev](https://nimeshakalanka.dev)
-- GitHub: [@nimeshakalanka](https://github.com/nimeshakalanka)
-- LinkedIn: [nimesha-akalanka](https://linkedin.com/in/nimesha-akalanka)
-- Email: nimeshakalanka@gmail.com
-
-## 🙏 Acknowledgments
-
-- Built with [Next.js](https://nextjs.org/)
-- Styled with [Tailwind CSS](https://tailwindcss.com/)
-- Animated with [Framer Motion](https://www.framer.com/motion/)
-- Icons from [Lucide](https://lucide.dev/)
-- Tech logos from [DevIcon CDN](https://devicon.dev/)
-
----
-
-⭐ Star this repo if you like it! Happy coding! 🚀
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
