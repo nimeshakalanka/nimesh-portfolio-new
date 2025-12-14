@@ -17,7 +17,7 @@ const projects = [
     title: 'NextJS Portfolio',
     description: 'A modern portfolio website built with Next.js and Tailwind CSS to showcase my projects and skills.',
     tech: ['Next.js', 'Tailwind CSS', 'Framer Motion'],
-    image: '/assets/projects/portfolio-new.png',
+    image: '/assets/projects/portfolio-neww.png',
     github: 'https://github.com/nimeshakalanka/nimesh-portfolio-new',
     demo: 'https://www.nimeshakalanka.dev'
   },

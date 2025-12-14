@@ -158,7 +158,7 @@ export default function Navigation() {
           >
             <div className="flex flex-col p-6 space-y-4">
               <a 
-                href="#about" 
+                href="#main" 
                 onClick={closeMobileMenu}
                 className="text-lg hover:text-blue-400 transition py-2 border-b border-gray-700/30"
               >
