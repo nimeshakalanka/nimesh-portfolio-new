@@ -96,7 +96,7 @@ export default function Hero() {
 
             <section className="flex justify-center items-center relative">
               <a
-                href="https://linkedin.com/in/nimesha-akalanka"
+                href="https://www.linkedin.com/in/nimesh-akalanka24"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group relative flex justify-center items-center p-3 w-14 h-14 rounded-md drop-shadow-xl bg-[#0077b5] font-semibold hover:translate-y-2 hover:rounded-[10%] transition-all duration-500"
