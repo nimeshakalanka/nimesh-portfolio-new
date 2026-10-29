@@ -1,8 +1,10 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import { Award, ExternalLink, Calendar } from 'lucide-react';
+import { motion } from 'motion/react';
+import { BadgeCheck, ArrowUpRight, Calendar } from 'lucide-react';
 import Image from 'next/image';
+import SectionHeading from '@/components/ui/SectionHeading';
+import TiltCard from '@/components/ui/TiltCard';
 
 const certificates = [
   {
@@ -37,73 +39,55 @@ const certificates = [
 
 export default function Certificates() {
   return (
-    <section id="certificates" className="py-12 md:py-20 px-4 md:px-6">
-      <div className="max-w-7xl mx-auto">
-        <motion.h1 
-          className="text-3xl md:text-4xl font-bold text-center mb-12 md:mb-16"
-          initial={{ opacity: 0, y: -20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-        >
-          Certificates & Achievements
-        </motion.h1>
+    <section id="certificates" className="relative px-4 py-24 md:px-6 md:py-32">
+      <div className="mx-auto max-w-7xl">
+        <SectionHeading index="03" eyebrow="Achievements" title="Certificates &" highlight="badges" />
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {certificates.map((cert, index) => (
-            <motion.a
-              key={index}
-              href={cert.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1, duration: 0.5 }}
-              whileHover={{ y: -10, scale: 1.02 }}
-              className="group relative bg-gradient-to-br from-gray-800/60 to-gray-900/60 rounded-2xl overflow-hidden border border-gray-700/50 hover:border-blue-400/70 transition-all duration-300 shadow-lg hover:shadow-2xl hover:shadow-blue-400/30"
-            >
-              {/* Certificate Image Background */}
-              <div className="relative h-56 overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/50 to-transparent z-10"></div>
-                <Image 
-                  src={cert.image} 
-                  alt={cert.title}
-                  fill
-                  className="object-cover group-hover:scale-110 transition-transform duration-500"
-                />
-                {/* Verified Badge */}
-                <div className="absolute top-3 right-3 z-20 bg-emerald-500/90 backdrop-blur-sm px-3 py-1 rounded-full flex items-center gap-1.5">
-                  <Award className="w-3 h-3 text-white" />
-                  <span className="text-xs font-semibold text-white">Verified</span>
-                </div>
-              </div>
-
-              {/* Certificate Details */}
-              <div className="relative p-5 bg-gradient-to-br from-gray-800/90 to-gray-900/90 backdrop-blur-sm">
-                <h3 className="text-base font-bold text-white mb-2 line-clamp-2 group-hover:text-blue-400 transition-colors">
-                  {cert.title}
-                </h3>
-                
-                <p className="text-sm text-blue-400 font-medium mb-3">
-                  {cert.issuer}
-                </p>
-
-                <div className="flex items-center justify-between">
-                  <span className="flex items-center gap-1 text-xs text-gray-400">
-                    <Calendar className="w-3 h-3" />
-                    {cert.date}
-                  </span>
-                </div>
-              </div>
-
-              {/* Hover Glow Effect */}
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/0 via-purple-500/0 to-pink-500/0 group-hover:from-blue-500/10 group-hover:via-purple-500/10 group-hover:to-pink-500/10 transition-all duration-500 pointer-events-none"></div>
-              
-              {/* Decorative corner accent */}
-              <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-blue-400/20 to-transparent rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            </motion.a>
-          ))}
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {certificates.map((cert, index) => {
+            const hasLink = cert.link !== '#';
+            return (
+              <motion.a
+                key={cert.title}
+                href={hasLink ? cert.link : undefined}
+                target="_blank"
+                rel="noopener noreferrer"
+                initial={{ opacity: 0, y: 40, rotateX: 15 }}
+                whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
+                viewport={{ once: true, margin: '-60px' }}
+                transition={{ delay: index * 0.1, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+                className="block"
+              >
+                <TiltCard intensity={12} className="rounded-3xl p-3">
+                  <div className="relative h-48 overflow-hidden rounded-2xl bg-white/5">
+                    <Image
+                      src={cert.image}
+                      alt={cert.title}
+                      fill
+                      sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
+                      className="object-cover transition-transform duration-700 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+                    <span className="absolute right-3 top-3 inline-flex items-center gap-1 rounded-full border border-white/20 bg-black/60 px-2.5 py-1 text-[11px] font-medium text-white">
+                      <BadgeCheck className="h-3.5 w-3.5" /> Verified
+                    </span>
+                  </div>
+                  <div className="px-2 pb-2 pt-4">
+                    <h3 className="line-clamp-2 min-h-[2.75rem] font-display font-semibold leading-snug">{cert.title}</h3>
+                    <p className="mt-1 text-sm text-muted">{cert.issuer}</p>
+                    <div className="mt-4 flex items-center justify-between text-xs text-muted">
+                      <span className="flex items-center gap-1.5">
+                        <Calendar className="h-3.5 w-3.5" /> {cert.date}
+                      </span>
+                      {hasLink && (
+                        <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-fg" />
+                      )}
+                    </div>
+                  </div>
+                </TiltCard>
+              </motion.a>
+            );
+          })}
         </div>
       </div>
     </section>

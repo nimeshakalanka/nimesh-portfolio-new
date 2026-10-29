@@ -1,8 +1,13 @@
+import { ArrowUp } from 'lucide-react';
+
 export default function Footer() {
   return (
-    <footer className="py-6 md:py-8 px-4 md:px-6 border-t border-gray-800">
-      <div className="max-w-6xl mx-auto text-center text-gray-500">
-        <p className="text-sm md:text-base">© {new Date().getFullYear()} Nimesha Akalanka. All rights reserved.</p>
+    <footer className="px-4 pb-8 md:px-6">
+      <div className="glass glass-edge mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 rounded-3xl px-6 py-5 text-sm text-muted sm:flex-row">
+        <p>© {new Date().getFullYear()} Nimesh Akalanka. Crafted with Next.js, Three.js &amp; a lot of glass.</p>
+        <a href="#main" className="glass-pill inline-flex items-center gap-2 rounded-full px-4 py-2 transition hover:-translate-y-0.5 hover:text-fg">
+          Back to top <ArrowUp className="h-4 w-4" />
+        </a>
       </div>
     </footer>
   );

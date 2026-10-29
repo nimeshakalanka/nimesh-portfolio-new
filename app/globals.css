@@ -4,151 +4,163 @@
 @tailwind utilities;
 /* stylelint-enable at-rule-no-unknown */
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+/* ---------- Theme tokens (RGB triplets so Tailwind can apply alpha) ----------
+   Monochrome black & white; the three accents only ever appear inside gradients. */
+:root {
+  color-scheme: dark;
+  --font-sans: 'Inter Variable';
+  --font-display: 'Space Grotesk Variable';
+
+  --bg: 0 0 0;
+  --fg: 245 245 245;
+  --muted: 161 161 170;
+  --subtle: 98 98 108;
+  --accent: 139 92 246;   /* violet */
+  --accent-2: 56 189 248; /* sky */
+  --accent-3: 236 72 153; /* pink */
+
+  --line: rgba(255, 255, 255, 0.08);
+  --line-strong: rgba(255, 255, 255, 0.16);
+  --surface: rgba(255, 255, 255, 0.025);
+  --surface-strong: rgba(255, 255, 255, 0.05);
 }
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 6rem;
 }
 
 body {
-  margin: 0;
-  padding: 0;
-  background: linear-gradient(-45deg, #0a0a0a, #111827, #0f172a, #000000);
-  background-size: 400% 400%;
-  animation: gradientAnimation 12s ease infinite;
+  background: rgb(var(--bg));
+  color: rgb(var(--fg));
   min-height: 100vh;
   overflow-x: hidden;
-  transition: background 0.3s ease, color 0.3s ease;
 }
 
-@keyframes gradientAnimation {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+::selection {
+  background: rgb(255 255 255 / 0.9);
+  color: #000;
 }
 
-@keyframes shimmer {
-  0% { background-position: 200% 0; }
-  100% { background-position: -200% 0; }
+@media (pointer: fine) {
+  body.has-custom-cursor,
+  body.has-custom-cursor a,
+  body.has-custom-cursor button {
+    cursor: none;
+  }
 }
 
-/* Glassmorphism styles */
-.glass-morphism {
-  background: rgba(17, 25, 40, 0.75);
-  backdrop-filter: blur(16px) saturate(180%);
-  -webkit-backdrop-filter: blur(16px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.125);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+/* ---------- Surfaces ----------
+   No backdrop-filter on cards: on a black page it adds nothing visible but costs a lot of GPU on scroll. */
+@layer components {
+  .glass {
+    position: relative;
+    background: linear-gradient(160deg, var(--surface-strong), var(--surface) 60%);
+    border: 1px solid var(--line);
+    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.06);
+  }
+
+  /* Only for things that float over content (nav, mobile menu). */
+  .glass-blur {
+    background: rgba(10, 10, 10, 0.6);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+
+  /* Gradient hairline along the top-left edge */
+  .glass-edge::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(
+      150deg,
+      rgba(255, 255, 255, 0.28),
+      rgba(255, 255, 255, 0) 30%,
+      rgba(255, 255, 255, 0) 70%,
+      rgb(var(--accent) / 0.35)
+    );
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  .glass-pill {
+    background: var(--surface-strong);
+    border: 1px solid var(--line);
+  }
+
+  .text-gradient {
+    background: linear-gradient(
+      100deg,
+      rgb(var(--accent-2)),
+      rgb(var(--accent)) 45%,
+      rgb(var(--accent-3))
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* Soft white-to-grey metallic text for big headings */
+  .text-chrome {
+    background: linear-gradient(180deg, #ffffff 30%, #8a8a93);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .btn-primary {
+    @apply relative inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 font-semibold text-black transition-all duration-300 hover:-translate-y-0.5;
+    box-shadow: 0 0 0 0 rgb(var(--accent) / 0);
+  }
+  .btn-primary:hover {
+    box-shadow:
+      -8px 6px 30px -8px rgb(var(--accent-2) / 0.6),
+      8px 6px 30px -8px rgb(var(--accent-3) / 0.6);
+  }
+
+  .btn-glass {
+    @apply inline-flex items-center gap-2 rounded-full border border-[var(--line-strong)] px-6 py-3 font-semibold transition-all duration-300 hover:-translate-y-0.5 hover:border-white/40 hover:bg-white/5;
+  }
+
+  .chip {
+    @apply glass-pill inline-flex items-center rounded-full px-3 py-1 text-xs font-medium text-muted;
+  }
 }
 
-.glass-morphism-light {
-  background: rgba(17, 25, 40, 0.25);
-  backdrop-filter: blur(12px) saturate(150%);
-  -webkit-backdrop-filter: blur(12px) saturate(150%);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+/* ---------- Ambient background (static: nothing here animates) ---------- */
+.bg-grid {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: radial-gradient(ellipse 70% 50% at 50% 0%, #000 20%, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse 70% 50% at 50% 0%, #000 20%, transparent 80%);
 }
 
-/* Light mode styles */
-html.light {
-  color-scheme: light;
+.noise {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+  opacity: 0.035;
 }
 
-html.light body {
-  background: linear-gradient(to bottom right, #f3f4f6, #e5e7eb, #f3f4f6) !important;
-  color: #111827 !important;
+.marquee-mask {
+  mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
 }
 
-html.light main {
-  background: linear-gradient(to bottom right, #f3f4f6, #e5e7eb, #f3f4f6) !important;
-  color: #111827 !important;
+/* Monochrome-black logos (Next.js, Express, Vercel…) need flipping on black */
+.invert-on-dark {
+  filter: invert(1);
 }
 
-html.light nav {
-  color: #111827 !important;
-}
-
-html.light .glass-morphism {
-  background: rgba(255, 255, 255, 0.75) !important;
-  backdrop-filter: blur(16px) saturate(180%);
-  -webkit-backdrop-filter: blur(16px) saturate(180%);
-  border: 1px solid rgba(209, 213, 219, 0.3) !important;
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1) !important;
-}
-
-html.light .glass-morphism-light {
-  background: rgba(255, 255, 255, 0.25) !important;
-  backdrop-filter: blur(12px) saturate(150%);
-  -webkit-backdrop-filter: blur(12px) saturate(150%);
-  border: 1px solid rgba(209, 213, 219, 0.2) !important;
-}
-
-html.light section {
-  color: #111827 !important;
-}
-
-html.light h1, html.light h2, html.light h3, html.light h4, html.light h5, html.light h6 {
-  color: #111827 !important;
-}
-
-html.light .text-white {
-  color: #111827 !important;
-}
-
-html.light .text-gray-400 {
-  color: #6b7280 !important;
-}
-
-html.light .text-gray-500 {
-  color: #6b7280 !important;
-}
-
-html.light .bg-gray-800,
-html.light .bg-gray-800\/50 {
-  background-color: #ffffff !important;
-  color: #111827 !important;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
-}
-
-html.light .border-gray-700,
-html.light .border-gray-800 {
-  border-color: #e5e7eb !important;
-}
-
-html.light .bg-gray-900\/50 {
-  background-color: #f9fafb !important;
-}
-
-html.light .bg-blue-500 {
-  background-color: #3b82f6 !important;
-}
-
-html.light .bg-blue-500\/10 {
-  background-color: rgba(59, 130, 246, 0.1) !important;
-}
-
-html.light .text-blue-400 {
-  color: #2563eb !important;
-}
-
-html.light a {
-  color: #111827;
-}
-
-html.light a:hover {
-  color: #2563eb !important;
-}
-
-/* Keep social button icons white in light mode */
-html.light .text-white {
-  color: #ffffff !important;
-}
-
-html.light svg.text-white,
-html.light svg.text-white path {
-  fill: #ffffff !important;
-  color: #ffffff !important;
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

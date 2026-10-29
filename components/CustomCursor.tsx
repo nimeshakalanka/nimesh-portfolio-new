@@ -1,85 +1,63 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, useMotionValue, useSpring } from 'motion/react';
 
+const INTERACTIVE = 'a, button, input, textarea, select, label, [role="button"]';
+
+/** Glass lens cursor: a dot that tracks instantly and a frosted ring that trails behind and grows over interactive elements. */
 export default function CustomCursor() {
-  const [mousePosition, setMousePosition] = useState({ x: -100, y: -100 });
-  const [isHovering, setIsHovering] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
+  const [hovering, setHovering] = useState(false);
+  const [visible, setVisible] = useState(false);
+
+  const x = useMotionValue(-100);
+  const y = useMotionValue(-100);
+  const ringX = useSpring(x, { stiffness: 350, damping: 28, mass: 0.5 });
+  const ringY = useSpring(y, { stiffness: 350, damping: 28, mass: 0.5 });
 
   useEffect(() => {
-    setIsMobile(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent));
-    
-    if (isMobile) return;
+    if (!window.matchMedia('(pointer: fine)').matches) return;
+    document.body.classList.add('has-custom-cursor');
 
-    const updateMousePosition = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
+    const onMove = (e: PointerEvent) => {
+      x.set(e.clientX);
+      y.set(e.clientY);
+      setVisible(true);
     };
+    // Event delegation, so elements rendered after mount are picked up too.
+    const onOver = (e: PointerEvent) => setHovering(!!(e.target as Element).closest?.(INTERACTIVE));
+    const onLeave = () => setVisible(false);
 
-    const handleMouseEnter = () => setIsHovering(true);
-    const handleMouseLeave = () => setIsHovering(false);
-
-    window.addEventListener('mousemove', updateMousePosition);
-
-    const interactiveElements = document.querySelectorAll('a, button, input, textarea, [role="button"]');
-    interactiveElements.forEach((el) => {
-      el.addEventListener('mouseenter', handleMouseEnter);
-      el.addEventListener('mouseleave', handleMouseLeave);
-    });
-
+    window.addEventListener('pointermove', onMove, { passive: true });
+    document.addEventListener('pointerover', onOver);
+    document.documentElement.addEventListener('pointerleave', onLeave);
     return () => {
-      window.removeEventListener('mousemove', updateMousePosition);
-      interactiveElements.forEach((el) => {
-        el.removeEventListener('mouseenter', handleMouseEnter);
-        el.removeEventListener('mouseleave', handleMouseLeave);
-      });
+      document.body.classList.remove('has-custom-cursor');
+      window.removeEventListener('pointermove', onMove);
+      document.removeEventListener('pointerover', onOver);
+      document.documentElement.removeEventListener('pointerleave', onLeave);
     };
-  }, [isMobile]);
+  }, [x, y]);
 
-  if (isMobile) return null;
-
+  // Hidden on touch devices via CSS; the effect above also never attaches listeners there.
   return (
-    <>
-      {mousePosition.x > 0 && mousePosition.y > 0 && (
-        <>
-          {/* Small dot - follows instantly */}
-          <motion.div
-            className="fixed top-0 left-0 pointer-events-none z-[9999]"
-            animate={{
-              x: mousePosition.x - 3,
-              y: mousePosition.y - 3,
-            }}
-            transition={{
-              type: "tween",
-              duration: 0,
-            }}
-          >
-            <div
-              className={`w-1.5 h-1.5 rounded-full bg-white transition-transform duration-200 ${isHovering ? 'scale-0' : 'scale-100'}`}
-            />
-          </motion.div>
-
-          {/* Outer ring - follows with slight lag */}
-          <motion.div
-            className="fixed top-0 left-0 pointer-events-none z-[9998]"
-            animate={{
-              x: mousePosition.x - (isHovering ? 24 : 16),
-              y: mousePosition.y - (isHovering ? 24 : 16),
-            }}
-            transition={{
-              type: "spring",
-              stiffness: 300,
-              damping: 25,
-              mass: 0.5,
-            }}
-          >
-            <div
-              className={`rounded-full border transition-all duration-300 ${isHovering ? 'w-12 h-12 border-blue-400/60 bg-blue-400/10' : 'w-8 h-8 border-white/40'}`}
-            />
-          </motion.div>
-        </>
-      )}
-    </>
+    <div aria-hidden className={`hidden transition-opacity duration-300 [@media(pointer:fine)]:block ${visible ? 'opacity-100' : 'opacity-0'}`}>
+      <motion.div
+        className="pointer-events-none fixed left-0 top-0 z-[10000] -ml-[3px] -mt-[3px] h-1.5 w-1.5 rounded-full bg-fg"
+        style={{ x, y, scale: hovering ? 0 : 1 }}
+      />
+      <motion.div
+        className="pointer-events-none fixed left-0 top-0 z-[9999] rounded-full border border-white/50 mix-blend-difference transition-[width,height,margin,background-color] duration-300"
+        style={{
+          x: ringX,
+          y: ringY,
+          width: hovering ? 56 : 32,
+          height: hovering ? 56 : 32,
+          marginLeft: hovering ? -28 : -16,
+          marginTop: hovering ? -28 : -16,
+          backgroundColor: hovering ? '#ffffff' : 'transparent',
+        }}
+      />
+    </div>
   );
 }
