@@ -7,7 +7,27 @@ import { GithubIcon } from '@/components/ui/BrandIcons';
 import SectionHeading from '@/components/ui/SectionHeading';
 import TiltCard from '@/components/ui/TiltCard';
 
-const projects = [
+type Project = {
+  title: string;
+  description: string;
+  tech: string[];
+  image: string;
+  /** Optional second screenshot; both are then shown together as a collage. */
+  secondImage?: string;
+  /** Omitted for private repositories. */
+  github?: string;
+  demo: string;
+};
+
+const projects: Project[] = [
+  {
+    title: 'Meyola Website and POS System',
+    description: "A complete product for Meyola Restaurant & Bar in Weligama: an offline-first desktop POS with kitchen and bar KOT printing, role-based staff logins, sales reports and LAN access for tablets, plus the restaurant's modern website.",
+    tech: ['React', 'TypeScript', 'Electron', 'Express.js', 'SQLite', 'Next.js', 'Tailwind CSS'],
+    image: '/assets/projects/meyola-website.webp',
+    secondImage: '/assets/projects/meyola-pos.webp',
+    demo: 'https://meyola.pages.dev/'
+  },
   {
     title: 'AI Watermark Remover',
     description: 'AI-powered tool for removing unwanted watermarks from images and videos using computer vision and deep learning.',
@@ -138,15 +158,32 @@ export default function Projects() {
               >
                 <TiltCard intensity={featured ? 5 : 8} className="rounded-3xl p-3">
                   <div className={`flex h-full flex-col ${featured ? 'lg:flex-row lg:gap-2' : ''}`}>
-                    <div className={`relative overflow-hidden rounded-2xl bg-white/5 ${featured ? 'h-56 md:h-72 lg:h-auto lg:min-h-[20rem] lg:w-3/5' : 'h-52'}`}>
-                      <Image
-                        src={project.image}
-                        alt={project.title}
-                        fill
-                        sizes={featured ? '(min-width: 1024px) 40vw, 100vw' : '(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw'}
-                        className="object-cover transition-transform duration-700 group-hover:scale-105"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+                    <div className={`relative overflow-hidden rounded-2xl bg-white/5 ${featured ? `${project.secondImage ? 'h-80' : 'h-56'} md:h-72 lg:h-auto lg:min-h-[20rem] lg:w-3/5` : 'h-52'}`}>
+                      {project.secondImage ? (
+                        // Each tile keeps the screenshots' exact shape and takes the larger of the stacked or side-by-side fit, so neither is cropped.
+                        <div className="absolute inset-0 flex flex-wrap content-center items-center justify-center gap-2 p-2" style={{ containerType: 'size' }}>
+                          {[project.image, project.secondImage].map((src, i) => (
+                            <div
+                              key={src}
+                              className="relative overflow-hidden rounded-xl border border-white/10"
+                              style={{ aspectRatio: '2106 / 1216', width: 'max(min(100cqw, calc((100cqh - 0.5rem) / 2 * 1.7319)), min(calc((100cqw - 0.5rem) / 2), calc(100cqh * 1.7319)))' }}
+                            >
+                              <Image src={src} alt={`${project.title} screenshot ${i + 1}`} fill sizes="(min-width: 1024px) 40vw, 100vw" className="object-cover" />
+                            </div>
+                          ))}
+                        </div>
+                      ) : (
+                        <>
+                          <Image
+                            src={project.image}
+                            alt={project.title}
+                            fill
+                            sizes={featured ? '(min-width: 1024px) 40vw, 100vw' : '(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw'}
+                            className="object-cover transition-transform duration-700 group-hover:scale-105"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+                        </>
+                      )}
                       <span className="absolute left-3 top-3 rounded-full border border-white/20 bg-black/60 px-2.5 py-1 font-mono text-[11px] text-white">
                         {featured ? '★ Featured' : String(index + 1).padStart(2, '0')}
                       </span>
@@ -175,15 +212,17 @@ export default function Projects() {
                         >
                           Live demo <ArrowUpRight className="h-4 w-4" />
                         </a>
-                        <a
-                          href={project.github}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="btn-glass !px-4 !py-2 text-sm"
-                          aria-label={`${project.title} source code`}
-                        >
-                          <GithubIcon className="h-4 w-4" /> Code
-                        </a>
+                        {project.github && (
+                          <a
+                            href={project.github}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="btn-glass !px-4 !py-2 text-sm"
+                            aria-label={`${project.title} source code`}
+                          >
+                            <GithubIcon className="h-4 w-4" /> Code
+                          </a>
+                        )}
                       </div>
                     </div>
                   </div>
