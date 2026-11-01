@@ -8,7 +8,7 @@ import { GithubIcon, LinkedinIcon } from '@/components/ui/BrandIcons';
 
 const OrbitScene = dynamic(() => import('@/components/three/OrbitScene'), { ssr: false });
 
-const roles = ['Full Stack Developer', 'Software Engineer', 'Telegram Bot Builder', 'UI Enthusiast'];
+const roles = ['Full Stack Developer', 'Software Engineer', 'Telegram Bot Builder', 'AI Enthusiast'];
 
 const socials = [
   { label: 'GitHub', href: 'https://github.com/nimeshakalanka', Icon: GithubIcon },
@@ -99,9 +99,9 @@ export default function Hero({ ready }: { ready: boolean }) {
           </motion.p>
 
           <motion.p {...reveal(0.65)} className="mx-auto mt-6 max-w-lg text-sm leading-relaxed text-muted md:text-base lg:mx-0">
-            22-year-old undergraduate pursuing a B.Sc. (Hons) in Information Systems at Sabaragamuwa University of
+            23 year old undergraduate pursuing a B.Sc. (Hons) in Information Systems at Sabaragamuwa University of
             Sri Lanka, building across the full stack. Since 2021 I&apos;ve freelanced on Fiverr and Upwork, shipping
-            Telegram bots and web apps for real-world clients.
+            Telegram bots and web apps for real world clients.
           </motion.p>
 
           <motion.div {...reveal(0.75)} className="mt-9 flex flex-wrap items-center justify-center gap-3 lg:justify-start">
