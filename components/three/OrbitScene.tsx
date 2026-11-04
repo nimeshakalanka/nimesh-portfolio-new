@@ -17,6 +17,7 @@ const vertexShader = /* glsl */ `
   uniform float uSize;
   uniform float uCell;
   uniform float uMorph;
+  uniform float uScatter;
   uniform vec2 uPointer;
   attribute vec3 aTarget;
   attribute float aBright;
@@ -45,18 +46,24 @@ const vertexShader = /* glsl */ `
     p.xy += normalize(d + 1e-4) * push * 0.14;
     p.z += push * 0.3;
 
+    // Scroll dissolve: dots peel away in a staggered wave, drifting outward and up toward the camera, and fade out.
+    float s = smoothstep(aRand * 0.5, aRand * 0.5 + 0.5, uScatter);
+    vec3 drift = normalize(position) * 1.4 + vec3(0.0, 0.9, 0.8);
+    drift += vec3(sin(aRand * 40.0 + uTime * 0.7), cos(aRand * 31.0 + uTime * 0.5), 0.0) * 0.35;
+    p += drift * s * (0.5 + aRand);
+
     vec4 mv = modelViewMatrix * vec4(p, 1.0);
     gl_Position = projectionMatrix * mv;
 
     // Halftone: in the portrait each dot's diameter tracks brightness (area ~ brightness), sized to its grid cell.
     float sphereSize = uSize * (0.5 + aRand);
     float dotSize = uCell * 1.15 * sqrt(aBright);
-    gl_PointSize = mix(sphereSize, dotSize, m) / -mv.z;
+    gl_PointSize = mix(sphereSize, dotSize, m) * (1.0 - 0.5 * s) / -mv.z;
 
     // Sphere: points facing the camera are bright, the far side fades.
     float facing = normalize((modelViewMatrix * vec4(position, 0.0)).xyz).z;
     float sphereAlpha = 0.12 + 0.88 * smoothstep(-0.6, 1.0, facing);
-    vAlpha = mix(sphereAlpha, step(0.001, aBright), m);
+    vAlpha = mix(sphereAlpha, step(0.001, aBright), m) * (1.0 - s);
     vY = mix(position.y, target.y / (${PORTRAIT_HEIGHT.toFixed(2)} * 0.5), m);
     vM = m;
   }
@@ -152,6 +159,8 @@ function ParticlePortrait({ count, active }: { count: number; active: boolean })
   const points = useRef<THREE.Points>(null);
   const material = useRef<THREE.ShaderMaterial>(null);
   const cell = useRef(0);
+  // 0→1 once, after the preloader: the first assembly of the portrait.
+  const intro = useRef(0);
   const gl = useThree((s) => s.gl);
 
   const geometry = useMemo(() => {
@@ -197,6 +206,7 @@ function ParticlePortrait({ count, active }: { count: number; active: boolean })
       uSize: { value: 6 },
       uCell: { value: 0 },
       uMorph: { value: 0 },
+      uScatter: { value: 0 },
       uPointer: { value: new THREE.Vector2(99, 99) },
       uC1: { value: new THREE.Color('#8b5cf6') },
       uC2: { value: new THREE.Color('#38bdf8') },
@@ -214,7 +224,15 @@ function ParticlePortrait({ count, active }: { count: number; active: boolean })
     m.uniforms.uSize.value = 4.2 * dpr;
     // One grid cell in device pixels at distance 1 (the shader divides by depth).
     m.uniforms.uCell.value = (cell.current * state.size.height * dpr) / (2 * Math.tan(THREE.MathUtils.degToRad(FOV / 2)));
-    if (active && cell.current) m.uniforms.uMorph.value = Math.min(m.uniforms.uMorph.value + delta / 2.6, 1);
+    if (active && cell.current) intro.current = Math.min(intro.current + delta / 2.6, 1);
+    m.uniforms.uMorph.value = intro.current;
+
+    // Scrolling out of the hero dissolves the portrait into drifting, fading dots; scrolling back up re-forms it.
+    // Fully gone once the hero is 45% scrolled past.
+    const hero = gl.domElement.closest('section')?.getBoundingClientRect();
+    const target = hero ? THREE.MathUtils.clamp(-hero.top / (hero.height * 0.45), 0, 1) : 0;
+    const scatter = m.uniforms.uScatter;
+    scatter.value = Math.abs(target - scatter.value) < 0.001 ? target : THREE.MathUtils.damp(scatter.value, target, 5, delta);
 
     // Project the window pointer onto the z=0 plane in the portrait's local space.
     const rect = gl.domElement.getBoundingClientRect();
