@@ -70,19 +70,19 @@ const projects: Project[] = [
   },
   {
     title: 'Priya Dream Kitchen Website (New)',
-    description: 'A modern website for a Sri Lankan cooking experience in Weligama, featuring cooking classes, menus, galleries, reviews, and WhatsApp-powered bookings.',
-    tech: ['Next.js', 'Tailwind CSS', 'React', 'WhatsApp Integration'],
-    image: '/assets/projects/priya-dream-kitchen-new.png',
+    description: 'A redesigned website for a traditional Sri Lankan cooking class in Weligama, with a warm, handcrafted look. It features the class experience, menus, a photo gallery, Google reviews and WhatsApp-powered bookings.',
+    tech: ['Next.js', 'React', 'Tailwind CSS', 'WhatsApp Integration'],
+    image: '/assets/projects/priya-dream-kitchen-v2.webp',
     github: 'https://github.com/Priya-Dream-Kitchen/priya-dream-kitchen-v2',
     demo: 'https://priyadreamkitchen.netlify.app/'
   },
   {
-    title: 'NextJS Portfolio',
-    description: 'A modern portfolio website built with Next.js and Tailwind CSS to showcase my projects and skills.',
-    tech: ['Next.js', 'Tailwind CSS', 'Framer Motion'],
-    image: '/assets/projects/portfolio-neww.png',
+    title: 'Next.js Portfolio',
+    description: 'This site: a minimal black-and-white portfolio with a WebGL particle portrait that assembles from a sphere and dissolves as you scroll, plus glass UI and smooth motion throughout.',
+    tech: ['Next.js', 'React', 'Three.js', 'React Three Fiber', 'GLSL', 'Tailwind CSS', 'Motion'],
+    image: '/assets/projects/portfolio-nextjs.webp',
     github: 'https://github.com/nimeshakalanka/nimesh-portfolio-new',
-    demo: 'https://www.nimeshakalanka.dev'
+    demo: 'https://nimeshakalanka.dev/'
   },
   {
     title: 'Hotel Billing System',
