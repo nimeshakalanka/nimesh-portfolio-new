@@ -29,6 +29,14 @@ const projects: Project[] = [
     demo: 'https://meyola.pages.dev/'
   },
   {
+    title: 'TagMyPhotos',
+    description: 'Free, private bulk photo watermarking that runs entirely in the browser. Add text, signature, badge or logo marks to hundreds of photos at once, with HEIC support, EXIF kept and offline use as a PWA. Nothing is uploaded.',
+    tech: ['React', 'TypeScript', 'Vite', 'Konva', 'Tailwind CSS', 'PWA'],
+    image: '/assets/projects/tagmyphotos.webp',
+    github: 'https://github.com/nimeshakalanka/tag-my-photos',
+    demo: 'https://tag-my-photos.pages.dev/'
+  },
+  {
     title: 'AI Watermark Remover',
     description: 'AI-powered tool for removing unwanted watermarks from images and videos using computer vision and deep learning.',
     tech: ['Python', 'PyTorch', 'OpenCV', 'Gradio', 'NumPy', 'ffmpeg'],
