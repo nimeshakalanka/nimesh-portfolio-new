@@ -20,12 +20,6 @@ const education: Entry[] = [
     period: '2014 - 2022',
     location: 'Matara, Sri Lanka',
   },
-  {
-    title: 'Primary Education',
-    org: 'MR/Siddartha Boys College',
-    period: '2009 - 2014',
-    location: 'Weligama, Sri Lanka',
-  },
 ];
 
 const experience: Entry[] = [
